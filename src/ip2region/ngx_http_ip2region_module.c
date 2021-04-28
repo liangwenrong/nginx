@@ -16,7 +16,7 @@
 #define IP2REGION_ISP_DOMAIN 6
 
 /**
- * 初始化函数声明
+ * 函数声明 初始化入口
  */
 static void*
 ngx_http_ip2region_create_main_conf(ngx_conf_t *cf);
@@ -29,7 +29,7 @@ static void
 ngx_http_ip2region_exit_process(ngx_cycle_t *cycle);
 
 /**
- * 函数声明
+ * 函数声明 公用函数
  */
 static ngx_int_t
 ngx_http_variable_get_handler_str(ngx_http_request_t *r, ngx_http_variable_value_t *v, u_char *data, ngx_int_t len);
@@ -38,7 +38,7 @@ ngx_http_ip2region_get_variable(ngx_http_request_t *r, u_char *buf, int IP2REGIO
 static u_char *
 ngx_http_ip2region_get_region_name(ngx_http_request_t *r, u_char *buf);
 /**
- * 要添加的变量声明
+ * 要添加的变量 gethandler函数声明
  */
 static ngx_int_t ngx_http_ip2region_add_variable(ngx_conf_t *cf);
 
@@ -145,7 +145,7 @@ static ngx_command_t  ngx_http_ip2region_commands[] = {
  * 调用添加变量函数入口，创建配置入口，初始化配置函数入口
  */
 static ngx_http_module_t ngx_http_ip2region_module_ctx = {
-        ngx_http_ip2region_add_variable,       /* preconfiguration */
+        NULL,//ngx_http_ip2region_add_variable,       /* preconfiguration */
         NULL,                                  /* postconfiguration */
 
         ngx_http_ip2region_create_main_conf,   /* create main configuration */
@@ -180,7 +180,7 @@ ngx_http_ip2region_create_main_conf(ngx_conf_t *cf)
     if(ip2region_conf == NULL) {
         return NULL;
     }
-    ip2region_conf->enable = NGX_CONF_UNSET;
+    ip2region_conf->enable = 0;
     ip2region_conf->algo = NGX_CONF_UNSET_UINT;
     return ip2region_conf;
 }
@@ -192,7 +192,7 @@ ngx_http_ip2region_init_main_conf(ngx_conf_t *cf, void *conf)
 
     //todo 来到这里应该是已经初始化值了
 
-    if (ip2region_conf->enable == NGX_CONF_UNSET || ip2region_conf->enable == 0) {
+    if (ip2region_conf->enable == 0) {
         //ngx_str_set(&ip2region_conf->db_file, "conf/ip2region.db");
         return NGX_CONF_OK;//不开启
     }
@@ -202,7 +202,7 @@ ngx_http_ip2region_init_main_conf(ngx_conf_t *cf, void *conf)
         return NGX_CONF_ERROR;//文件路径没传
     }
 
-    if (ngx_conf_full_name(cf->cycle, &ip2region_conf->db_file, 0) != NGX_OK) {//todo 不知道干嘛的
+    if (ngx_conf_full_name(cf->cycle, &ip2region_conf->db_file, 0) != NGX_OK) {//不是文件绝对路径则报错
         return NGX_CONF_ERROR;
     }
 
@@ -211,7 +211,7 @@ ngx_http_ip2region_init_main_conf(ngx_conf_t *cf, void *conf)
     if(ip2region_conf->algo == NGX_CONF_UNSET_UINT) {
         ip2region_conf->algo = NGX_IP2REGION_MEMORY;//默认
     }
-
+    ngx_http_ip2region_add_variable(cf);//添加自定义变量
     return NGX_CONF_OK;
 }
 
@@ -325,7 +325,7 @@ ngx_http_ip2region_get_variable(ngx_http_request_t *r, u_char *buf, int IP2REGIO
     value = ngx_http_get_indexed_variable(r, ngx_http_ip2region_variables[IP2REGION_INDEX].index);
 
     if (value == NULL || value->not_found) {
-        *buf = '-';//todo 看不懂
+        *buf = '-';//todo 找不到，不应该返回这个
         return buf + 1;
     }
 //    return (((u_char *) memcpy(buf, value->data, value->len)) + (value->len));

@@ -16,6 +16,8 @@ search_func_ptr ip2region_search_func;
  * @param city
  * @return
  */
+/**
+
 ngx_int_t
 ngx_ip2region_search(ngx_str_t *addr_text, ngx_str_t *isp, ngx_str_t *city)
 {
@@ -69,6 +71,7 @@ ngx_ip2region_search(ngx_str_t *addr_text, ngx_str_t *isp, ngx_str_t *city)
 
     return NGX_OK;
 }
+*/
 
 /**
  * 初始ip库
@@ -112,6 +115,7 @@ ngx_int_t destroy_ip2region(ngx_log_t *log)
     if (log) {
         ngx_log_error(NGX_LOG_INFO, log, 0, "ip2region destroy");
     }
+    return 1;
 }
 
 static ngx_inline u_char *

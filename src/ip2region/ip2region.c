@@ -302,7 +302,7 @@ IP2R_API uint_t ip2region_btree_search(ip2region_t ip2rObj, uint_t ip, datablock
             }
             h = m - 1;
         } else {
-            if ( m == ip2rObj->headerLen - 1 ) {
+            if ( (uint_t)m == ip2rObj->headerLen - 1 ) {
                 sptr = ip2rObj->HeaderPtr[m-1];
                 eptr = ip2rObj->HeaderPtr[m  ];
                 break;

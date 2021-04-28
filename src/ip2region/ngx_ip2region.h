@@ -27,7 +27,7 @@ typedef uint_t (*search_func_ptr)(ip2region_t, uint_t, datablock_t);
 
 extern ngx_int_t create_ip2region(ngx_http_ip2region_conf_t *conf, ngx_log_t *log);
 extern ngx_int_t destroy_ip2region(ngx_log_t *log);
-extern ngx_int_t ngx_ip2region_search(ngx_str_t *addr_text, ngx_str_t *isp, ngx_str_t *city);
+//extern ngx_int_t ngx_ip2region_search(ngx_str_t *addr_text, ngx_str_t *isp, ngx_str_t *city);
 
 #ifdef __cplusplus
 }

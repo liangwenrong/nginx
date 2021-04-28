@@ -33,10 +33,11 @@ ngx_http_ip2region_exit_process(ngx_cycle_t *cycle);
  */
 static ngx_int_t
 ngx_http_variable_get_handler_str(ngx_http_request_t *r, ngx_http_variable_value_t *v, u_char *data, ngx_int_t len);
+/*
 static u_char *
 ngx_http_ip2region_get_variable(ngx_http_request_t *r, u_char *buf, int IP2REGION_INDEX);
 static u_char *
-ngx_http_ip2region_get_region_name(ngx_http_request_t *r, u_char *buf);
+ngx_http_ip2region_get_region_name(ngx_http_request_t *r, u_char *buf);*/
 /**
  * 要添加的变量 gethandler函数声明
  */
@@ -318,6 +319,7 @@ ngx_http_variable_get_handler_str(ngx_http_request_t *r, ngx_http_variable_value
  * @param IP2REGION_INDEX ngx_http_ip2region_variables 下标
  * @return 
  */
+ /*
 static u_char *
 ngx_http_ip2region_get_variable(ngx_http_request_t *r, u_char *buf, int IP2REGION_INDEX)
 {
@@ -335,7 +337,7 @@ ngx_http_ip2region_get_variable(ngx_http_request_t *r, u_char *buf, int IP2REGIO
 static u_char *
 ngx_http_ip2region_get_region_name(ngx_http_request_t *r, u_char *buf){
     return ngx_http_ip2region_get_variable(r, buf, ngx_http_ip2region_variables[IP2REGION_REGION_NAME].index);
-}
+}*/
 
 
 static ngx_int_t
@@ -344,44 +346,44 @@ ngx_http_variable_ip2region_city_id(ngx_http_request_t *r, ngx_http_variable_val
 //    u_char *buf = NULL;//todo NULL有问题
 //    u_char *region_name = ngx_http_ip2region_get_region_name(r, buf);
     
-    u_char *city_id = "ngx_http_variable_ip2region_city_id";
-    return ngx_http_variable_get_handler_str(r, v, city_id, strlen(city_id));//todo 长度看下是多少
+    u_char *city_id = (u_char *)"ngx_http_variable_ip2region_city_id";
+    return ngx_http_variable_get_handler_str(r, v, city_id, ngx_strnlen(city_id, sizeof(u_char)));//todo 长度看下是多少
 }
 static ngx_int_t
 ngx_http_variable_ip2region_region_name(ngx_http_request_t *r, ngx_http_variable_value_t *v, uintptr_t data)
 {
-    u_char *XXXX = "ngx_http_variable_ip2region_region_name";
-    return ngx_http_variable_get_handler_str(r, v, XXXX, strlen(XXXX));//todo 长度看下是多少
+    u_char *XXXX = (u_char *)"ngx_http_variable_ip2region_region_name";
+    return ngx_http_variable_get_handler_str(r, v, XXXX, ngx_strnlen(XXXX, sizeof(u_char)));//todo 长度看下是多少
 }
 static ngx_int_t
 ngx_http_variable_ip2region_country_name(ngx_http_request_t *r, ngx_http_variable_value_t *v, uintptr_t data)
 {
-    u_char *XXXX = "ngx_http_variable_ip2region_country_name";
-    return ngx_http_variable_get_handler_str(r, v, XXXX, strlen(XXXX));//todo 长度看下是多少
+    u_char *XXXX = (u_char *)"ngx_http_variable_ip2region_country_name";
+    return ngx_http_variable_get_handler_str(r, v, XXXX, ngx_strnlen(XXXX, sizeof(u_char)));//todo 长度看下是多少
 }
 static ngx_int_t
 ngx_http_variable_ip2region_province_name(ngx_http_request_t *r, ngx_http_variable_value_t *v, uintptr_t data)
 {
-    u_char *XXXX = "ngx_http_variable_ip2region_province_name";
-    return ngx_http_variable_get_handler_str(r, v, XXXX, strlen(XXXX));//todo 长度看下是多少
+    u_char *XXXX = (u_char *)"ngx_http_variable_ip2region_province_name";
+    return ngx_http_variable_get_handler_str(r, v, XXXX, ngx_strnlen(XXXX, sizeof(u_char)));//todo 长度看下是多少
 }
 static ngx_int_t
 ngx_http_variable_ip2region_city_name(ngx_http_request_t *r, ngx_http_variable_value_t *v, uintptr_t data)
 {
-    u_char *XXXX = "ngx_http_variable_ip2region_city_name";
-    return ngx_http_variable_get_handler_str(r, v, XXXX, strlen(XXXX));//todo 长度看下是多少
+    u_char *XXXX = (u_char *)"ngx_http_variable_ip2region_city_name";
+    return ngx_http_variable_get_handler_str(r, v, XXXX, ngx_strnlen(XXXX, sizeof(u_char)));//todo 长度看下是多少
 }
 static ngx_int_t
 ngx_http_variable_ip2region_net_type(ngx_http_request_t *r, ngx_http_variable_value_t *v, uintptr_t data)
 {
-    u_char *XXXX = "ngx_http_variable_ip2region_net_type";
-    return ngx_http_variable_get_handler_str(r, v, XXXX, strlen(XXXX));//todo 长度看下是多少
+    u_char *XXXX = (u_char *)"ngx_http_variable_ip2region_net_type";
+    return ngx_http_variable_get_handler_str(r, v, XXXX, ngx_strnlen(XXXX, sizeof(u_char)));//todo 长度看下是多少
 }
 static ngx_int_t
 ngx_http_variable_ip2region_isp_domain(ngx_http_request_t *r, ngx_http_variable_value_t *v, uintptr_t data)
 {
-    u_char *XXXX = "ngx_http_variable_ip2region_isp_domain";
-    return ngx_http_variable_get_handler_str(r, v, XXXX, strlen(XXXX));//todo 长度看下是多少
+    u_char *XXXX = (u_char *)"ngx_http_variable_ip2region_isp_domain";
+    return ngx_http_variable_get_handler_str(r, v, XXXX, ngx_strnlen(XXXX, sizeof(u_char)));//todo 长度看下是多少
 }
 
 
